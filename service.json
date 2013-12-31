@@ -1,0 +1,8 @@
+{
+	"port": 8006,
+	"name": "Authentication",
+	"commands": {
+		"main": 'nodejs server.js %p %d'
+	},
+	"subdomain": "auth"
+}
