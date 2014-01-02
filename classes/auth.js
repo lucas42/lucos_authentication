@@ -1,6 +1,6 @@
 "strict mode";
 var request = require('request'),
-   url = require('url')
+   url = require('url');
 var Auth = (function () {
 	var listauth = {};
 	
