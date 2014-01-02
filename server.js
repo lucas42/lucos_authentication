@@ -248,6 +248,9 @@ function start_server(port) {
 			case "/favicon.ico":
 				res.sendFile('img/favicon.ico', 'image/png');
 				break;
+			case "/robots.txt":
+				res.sendFile('robots.txt', 'text/plain');
+				break;
 			case "/providerimg":
 				try {
 					provider = new Provider(params.type);
