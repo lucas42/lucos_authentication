@@ -108,8 +108,8 @@ var Auth = (function () {
 				followRedirect: false
 			}, function (error, response, body) {
 				var data;
-				if (response.headers.location) data = response.headers.location.split('/').pop();
-				if (error || response.statusCode >= 400 || isNaN(data)) data = null;
+				if (response && response.headers.location) data = response.headers.location.split('/').pop();
+				if (error || (response && response.statusCode >= 400) || isNaN(data)) data = null;
 				callback(data);
 			});
 		}
