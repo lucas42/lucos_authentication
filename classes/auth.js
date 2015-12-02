@@ -100,7 +100,7 @@ var Auth = (function () {
 		function _fetchAgentId(userid, callback) {
 			var domain = require('./hosts').get("contacts");
 			request({
-				url: "http://"+domain+"/identify",
+				url: "https://"+domain+"/identify",
 				qs: {
 					type: provider.getAccountType(),
 					id: userid,
