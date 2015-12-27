@@ -4,7 +4,8 @@ var request = require('request'),
    querystring = require('querystring');
 
 
-var redirect_uri = 'http://'+require('./hosts').get('auth')+'/providercallback';
+// TODO: Get the domain from the host header?
+var redirect_uri = 'https://auth.l42.eu/providercallback';
 
 var Provider = (function () {
 	var list = {}, providers;

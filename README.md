@@ -22,4 +22,4 @@ A json file which contains data about various authentication providers.  This sh
 This file consists of a newline separated list of keys which can be used by other modules which request sensitive data from the authentication service (eg tokens for third party services).  Modules which don't have any apikey can still use the authentication service, but won't be privy to any of this information.
 
 ## Running
-The web server is designed to be run within lucos_services, but can be run standalone by running server.js with nodejs, passing in the port to run on as the first parameter and the domain of a running instance of lucos_services as the second parameter.
+The web server is designed to be run within lucos_services, but can be run standalone by running server.js with nodejs, passing in the port to run on as the first parameter.

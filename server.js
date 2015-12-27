@@ -32,25 +32,16 @@ function exit(errorstring, errornumber, showusage) {
 	console.log("Error: "+errorstring+"\n\n");
 	process.exit(errornumber);
 }
-var hosts = require("./classes/hosts");
 var port;
 (function parseArgs() {
 	port = parseInt(process.argv[2], 10);
 	if (isNaN(port) || port <= 0) {
 		exit("Port must be number greater than zero", 1, true);
 	}
-	var services_domain = process.argv[3];
-	if (!services_domain) {
-		exit("servicesdomain is missing", 2, true);
-	}
-	hosts.setDomain(services_domain);
  })();
 
-
 try {
-	hosts.update(function () {
-		start_server(port);
-	});
+	start_server(port);
 } catch (e) {
 	exit(e, 3);
 }
@@ -142,7 +133,7 @@ function start_server(port) {
 						provideroutput += "<img src='/providerimg?"+providerparams+"' alt='"+provider.getName()+"'/>";
 						provideroutput += "</a></li>";
 					}
-					return data.toString().replace('$providerList$', provideroutput).replace('$rootdomain$', hosts.get('root'));
+					return data.toString().replace('$providerList$', provideroutput);
 				});
 				break;
 			case "/provider":
@@ -258,21 +249,6 @@ function start_server(port) {
 					res.sendError(404, 'Provider not found');
 				}
 				res.sendFile('img/providers/'+params.type+'.png', 'image/png');
-				break;
-			case "/refreshhosts":
-				if (req.method != "POST") {
-					res.sendError(405, "Method not Allowed", {"Allow": "POST"});
-				} else {
-				  try {
-					hosts.update(function () {
-						res.writeHead(204, {'Cache-control': "no-cache"});
-						res.end();
-					});
-				  } catch (e) {
-					  res.sendError(500, e);
-				  }
-				}
-				  
 				break;
 			case "/":
 			

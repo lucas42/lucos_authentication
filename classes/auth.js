@@ -98,7 +98,7 @@ var Auth = (function () {
 		}
 		
 		function _fetchAgentId(userid, callback) {
-			var domain = require('./hosts').get("contacts");
+			var domain = "contacts.l42.eu";
 			request({
 				url: "https://"+domain+"/identify",
 				qs: {
