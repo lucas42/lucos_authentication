@@ -3,7 +3,7 @@ ExecStart=/usr/bin/nodejs server.js 8006
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=lucos_time
+SyslogIdentifier=lucos_authentication
 User=lucos
 Group=lucos
 Environment=NODE_ENV=production
