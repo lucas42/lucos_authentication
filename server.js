@@ -52,12 +52,18 @@ function start_server(port) {
 
 
 	http.ServerResponse.prototype.sendError = function sendError(code, message, headers) {
-		if (!headers) headers = {};
-		if (!('Content-Type' in headers)) headers['Content-Type'] = 'text/html';
-		this.writeHead(code, headers);
-		if (headers['Content-Type'] == 'text/html') this.write('<br/><strong>Error:</strong> '+message);
-		else this.write(message);
-		this.end();
+		try {
+			if (this.finished) throw new Error("Response already finished.");
+			if (!headers) headers = {};
+			if (!('Content-Type' in headers)) headers['Content-Type'] = 'text/html';
+			this.writeHead(code, headers);
+			if (headers['Content-Type'] == 'text/html') this.write('<br/><strong>Error:</strong> '+message);
+			else this.write(message);
+			this.end();
+		} catch (error) {
+			console.error("Can't send error page: \"" + message + "\"");
+			console.error(error);
+		}
 	};
 
 
