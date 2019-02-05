@@ -105,7 +105,10 @@ function start_server(port) {
 					}
 				}
 			
-				if (!params.redirect_uri) res.sendError(404, "Redirect URI parameter required");
+				if (!params.redirect_uri) {
+					res.sendError(404, "Redirect URI parameter required");
+					break;
+				}
 				redirectparams = querystring.stringify({
 					redirect_uri: params.redirect_uri
 				});
@@ -143,12 +146,16 @@ function start_server(port) {
 				});
 				break;
 			case "/provider":
-				if (!params.redirect_uri && !cookies.redirect_uri) res.sendError(404, "Redirect URI parameter required");
+				if (!params.redirect_uri && !cookies.redirect_uri) {
+					res.sendError(404, "Redirect URI parameter required");
+					break;
+				}
 				
 				try {
 					provider = new Provider(params.type);
 				} catch (e) {
 					res.sendError(404, 'Provider not found');
+					break;
 				}
 				try {
 					auth = new Auth(provider, params.redirect_uri);
@@ -253,6 +260,7 @@ function start_server(port) {
 					provider = new Provider(params.type);
 				} catch (e) {
 					res.sendError(404, 'Provider not found');
+					break;
 				}
 				res.sendFile('img/providers/'+params.type+'.png', 'image/png');
 				break;
