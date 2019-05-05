@@ -100,9 +100,9 @@ var Provider = (function () {
 		var file, providerlist, key, conf, provider;
 		var fs = require('fs');
 		try {
-			file = fs.readFileSync('providers.json');
+			file = fs.readFileSync('/etc/authconfig/providers.json');
 		} catch (e) {
-			console.error("providers.json could not be read: "+e);
+			console.error("/etc/authconfig/providers.json could not be read: "+e);
 			return;
 		}
 		providerlist = JSON.parse(file.toString());

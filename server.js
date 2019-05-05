@@ -11,9 +11,9 @@ var appkeys = {};
 (function getAppKeys() {
 	var file, appkeylist, ii, key;
 	try {
-		file = fs.readFileSync('appkeys.conf');
+		file = fs.readFileSync('/etc/authconfig/appkeys.conf');
 	} catch (e) {
-		console.log("appkeys.conf could not be read");
+		console.log("/etc/authconfig/appkeys.conf could not be read");
 		return;
 	}
 	appkeylist = file.toString().split("\n");
