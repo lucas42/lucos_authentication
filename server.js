@@ -216,6 +216,7 @@ function start_server(port) {
 				break;
 			case "/whoami":
 				try {
+					if (!req.headers.origin) req.headers.origin = "unknown";
 					auth = Auth.getById(cookies.auth_token);
 					auth.getAgentId(function (agentid) {
 						res.writeHead(200, {'Content-Type': "application/json", "Access-Control-Allow-Origin": req.headers.origin, "Access-Control-Allow-Credentials": true, "Vary": "Access-Control-Allow-Origin"});
