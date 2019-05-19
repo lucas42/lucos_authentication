@@ -3,9 +3,10 @@ Authentication for lucos services
 
 ## Dependencies
 * docker
+* docker-compose
 
 ## Setup
-Two config are required to run lucos_auth, both should be placed in a docker volume mounted in the container at `/etc/authconfig`
+Two config files are used to run lucos_auth, both should be placed in a docker volume named `lucos_authentication_config` (This gets mounted in the container at `/etc/authconfig`)
 ### providers.json
 A json file which contains data about various authentication providers.  This should be in the form of an object, where the keys are unique ids for each provider and the value is an object of key/value pairs about the provider.  The following fields are accepted:
 * **name**: The name of the provider (user facing)
@@ -21,8 +22,10 @@ A json file which contains data about various authentication providers.  This sh
 ### appkeys.conf
 This file consists of a newline separated list of keys which can be used by other modules which request sensitive data from the authentication service (eg tokens for third party services).  Modules which don't have any apikey can still use the authentication service, but won't be privy to any of this information.
 
+The application should continue to run if appkeys.conf is missing, with no sensitive data returned to services callling it.
+
 ## Running
-`docker run -d -p 8006:8080 --name authentication --mount source=authconfig,target=/etc/authconfig lucas42/lucos_authentication`
+`docker-compose up -d`
 
 ## Building
 The build is configured to run in Dockerhub when a commit is pushed to the master branch in github.
