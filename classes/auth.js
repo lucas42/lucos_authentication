@@ -98,18 +98,17 @@ var Auth = (function () {
 		}
 		
 		function _fetchAgentId(userid, callback) {
-			var domain = "contacts.l42.eu";
+			const domain = "contacts.l42.eu";
+			const url = `https://${domain}/identify?type=${provider.getAccountType()}&id=${userid}`;
+			console.log(`Fetch agent id from contacts service ${url}`);
 			request({
-				url: "https://"+domain+"/identify",
-				qs: {
-					type: provider.getAccountType(),
-					id: userid,
-				},
+				url,
 				followRedirect: false
 			}, function (error, response, body) {
 				var data;
 				if (response && response.headers.location) data = response.headers.location.split('/').pop();
 				if (error || (response && response.statusCode >= 400) || isNaN(data)) data = null;
+				if (!data) console.error(`Failed to get agent from contacts service.  ${error}`);
 				callback(data);
 			});
 		}
