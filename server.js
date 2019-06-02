@@ -28,13 +28,13 @@ function isTrusted(apikey) {
 	return appkeys[apikey];
 }
 function exit(errorstring, errornumber, showusage) {
-	if (showusage) console.log("Usage: nodejs server.js port servicesdomain\n");
+	if (showusage) console.log("Usage: nodejs server.js\n");
 	console.log("Error: "+errorstring+"\n\n");
 	process.exit(errornumber);
 }
 var port;
 (function parseArgs() {
-	port = parseInt(process.argv[2], 10);
+	port = parseInt(process.env.PORT, 10);
 	if (isNaN(port) || port <= 0) {
 		exit("Port must be number greater than zero", 1, true);
 	}
