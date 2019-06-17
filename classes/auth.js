@@ -99,7 +99,7 @@ var Auth = (function () {
 		
 		function _fetchAgentId(userid, callback) {
 			const domain = "contacts.l42.eu";
-			const url = `https://${domain}/identify?type=${provider.getAccountType()}&id=${userid}`;
+			const url = `https://${domain}/identify?type=${provider.getAccountType()}&userid=${userid}`;
 			console.log(`Fetch agent id from contacts service ${url}`);
 			request({
 				url,

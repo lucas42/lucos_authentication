@@ -14,7 +14,7 @@ A json file which contains data about various authentication providers.  This sh
 * **clientid**: The id used by the lucos app with that provider
 * **clientsecret**: The secret used by the lucos app with that provider
 * **scope**: The scope of information request from provider (optional, depending on provider)
-* **accountType**: The id of the provider's corresponding account type in lucos_contacts
+* **accountType**: The id of the provider's corresponding account type in lucos_contacts (defaults to name)
 * **token_host**: The domain of the provider's endpoint for requesting tokens
 * **token_path**: The path of the provider's endpoint for requesting tokens
 * **userinfoendpoint**: The endpoint for identifying the current user from the provider

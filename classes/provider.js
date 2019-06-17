@@ -32,7 +32,7 @@ var Provider = (function () {
 		 * Returns the id for the accountType in lucOS contacts
 		 */
 		this.getAccountType = function () {
-			return accountType;
+			return accountType || name;
 		}
 		function getToken(querydata, callback) {
 			request({
