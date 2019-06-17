@@ -8,13 +8,12 @@ Authentication for lucos services
 ## Setup
 Two config files are used to run lucos_auth, both should be placed in a docker volume named `lucos_authentication_config` (This gets mounted in the container at `/etc/authconfig`)
 ### providers.json
-A json file which contains data about various authentication providers.  This should be in the form of an object, where the keys are unique ids for each provider and the value is an object of key/value pairs about the provider.  The following fields are accepted:
+A json file which contains data about various authentication providers.  This should be in the form of an object, where the keys are unique ids for each provider matching the account types used by lucos_contacts and the value is an object of key/value pairs about the provider.  The following fields are accepted:
 * **name**: The name of the provider (user facing)
 * **auth_url**: The url for the provider's oauth2 endpoint
 * **clientid**: The id used by the lucos app with that provider
 * **clientsecret**: The secret used by the lucos app with that provider
 * **scope**: The scope of information request from provider (optional, depending on provider)
-* **accountType**: The id of the provider's corresponding account type in lucos_contacts (defaults to name)
 * **token_host**: The domain of the provider's endpoint for requesting tokens
 * **token_path**: The path of the provider's endpoint for requesting tokens
 * **userinfoendpoint**: The endpoint for identifying the current user from the provider
