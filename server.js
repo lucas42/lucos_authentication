@@ -270,6 +270,16 @@ function start_server(port) {
 				// For now, redirect homepage to /authenticate
 				res.sendError(302, "File has moved", {'Location': '/authenticate'});
 				break;
+			case "/_info":
+				const output = {
+					system: 'lucos_authentication',
+					checks: {},
+					metrics: {},
+				};
+				res.writeHead(200, {'Content-Type': 'application/json' });
+				res.write(JSON.stringify(output));
+				res.end();
+				break;
 			default:
 				res.sendError(404, 'File not found');
 				break;
