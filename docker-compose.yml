@@ -4,7 +4,7 @@ services:
       build: .
       container_name: authentication
       ports: 
-        - "8006:8080"
+        - "8006:8006"
       volumes:
         - "config:/etc/authconfig"
       image: lucas42/lucos_authentication
