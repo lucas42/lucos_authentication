@@ -271,11 +271,30 @@ function start_server(port) {
 				res.sendError(302, "File has moved", {'Location': '/authenticate'});
 				break;
 			case "/_info":
+				const numProviders = Provider.getTypes().length;
 				const output = {
 					system: 'lucos_authentication',
-					checks: {},
-					metrics: {},
+					checks: {
+						providers : {
+							techDetail: "Checks whether any providers have been configured",
+						}
+					},
+					metrics: {
+						"provider-count": {
+							value: numProviders,
+							techDetail: "The number of providers configured",
+						}
+					},
+					ci: {
+						circle: "gh/lucas42/lucos_authentication",
+					},
 				};
+				if (numProviders > 0) {
+					output.checks.providers.ok = true;
+				} else {
+					output.checks.providers.ok = false;
+					output.checks.providers.debug = "No providers have been configured";
+				}
 				res.writeHead(200, {'Content-Type': 'application/json' });
 				res.write(JSON.stringify(output));
 				res.end();
