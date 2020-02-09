@@ -5,6 +5,7 @@ var http = require('http'),
    url = require('url'),
    querystring = require('querystring'),
    fs = require('fs');
+const { fetchAgentId } = require ('./helpers');
 
 
 var appkeys = {};
@@ -277,7 +278,10 @@ function start_server(port) {
 					checks: {
 						providers : {
 							techDetail: "Checks whether any providers have been configured",
-						}
+						},
+						"normalised-agentid": {
+							techDetail: "Attempts to fetch an agentid from lucos_contacts",
+						},
 					},
 					metrics: {
 						"provider-count": {
@@ -295,9 +299,20 @@ function start_server(port) {
 					output.checks.providers.ok = false;
 					output.checks.providers.debug = "No providers have been configured";
 				}
-				res.writeHead(200, {'Content-Type': 'application/json' });
-				res.write(JSON.stringify(output));
-				res.end();
+				fetchAgentId('google', '108747267111868705074', function (returnedAgentId) {
+					if (!returnedAgentId) {
+						output.checks['normalised-agentid'].ok = false;
+						output.checks['normalised-agentid'].debug = "No agent id returned from lucos_contacts";
+					} else if (returnedAgentId != 2) {
+						output.checks['normalised-agentid'].ok = false;
+						output.checks['normalised-agentid'].debug = `lucos_contacts returned an agent id of ${returnedAgentId}, expected 2`;
+					} else {
+						output.checks['normalised-agentid'].ok = true;
+					}
+					res.writeHead(200, {'Content-Type': 'application/json' });
+					res.write(JSON.stringify(output));
+					res.end();
+				});
 				break;
 			default:
 				res.sendError(404, 'File not found');
