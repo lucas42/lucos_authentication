@@ -1,6 +1,7 @@
 "strict mode";
-var request = require('request'),
-   url = require('url');
+const url = require('url');
+const { fetchAgentId } = require ('../helpers');
+
 var Auth = (function () {
 	var listauth = {};
 	
@@ -63,7 +64,7 @@ var Auth = (function () {
 				if (agentid) {
 					_callCallbacks(true);
 				} else if (userid) {
-					_fetchAgentId(userid, function (newagentid) {
+					fetchAgentId(provider.getAccountType(), userid, function (newagentid) {
 						agentid = newagentid;
 						if (agentid) _getAgentId();
 						else _callCallbacks(false);
@@ -97,21 +98,6 @@ var Auth = (function () {
 			});
 		}
 		
-		function _fetchAgentId(userid, callback) {
-			const domain = "contacts.l42.eu";
-			const url = `https://${domain}/identify?type=${provider.getAccountType()}&userid=${userid}`;
-			console.log(`Fetch agent id from contacts service ${url}`);
-			request({
-				url,
-				followRedirect: false
-			}, function (error, response, body) {
-				var data;
-				if (response && response.headers.location) data = response.headers.location.split('/').pop();
-				if (error || (response && response.statusCode >= 400) || isNaN(data)) data = null;
-				if (!data) console.error(`Failed to get agent from contacts service.  ${error}`);
-				callback(data);
-			});
-		}
 	}
 	
 	Auth.getById = function(id) {
