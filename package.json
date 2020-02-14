@@ -4,7 +4,7 @@
   "description": "Authentication service for lucos apps",
   "main": "server.js",
   "dependencies": {
-    "request": "^2.88.0"
+    "request": "^2.88.2"
   },
   "devDependencies": {},
   "scripts": {
