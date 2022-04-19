@@ -272,7 +272,7 @@ function start_server(port) {
 			case "/":
 			
 				// For now, redirect homepage to /authenticate
-				res.sendError(302, "File has moved", {'Location': '/authenticate'});
+				res.sendError(302, "File has moved", {'Location': '/authenticate?redirect_uri=https%3A%2F%2Fl42.eu%2F'});
 				break;
 			case "/_info":
 				const numProviders = Provider.getTypes().length;
