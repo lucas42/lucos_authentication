@@ -266,6 +266,9 @@ function start_server(port) {
 				}
 				res.sendFile('img/providers/'+params.type+'.png', 'image/png');
 				break;
+			case "/privacy":
+				res.sendFile('privacy.html', 'text/html');
+				break;
 			case "/":
 			
 				// For now, redirect homepage to /authenticate
