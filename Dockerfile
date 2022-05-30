@@ -1,7 +1,9 @@
+FROM lucas42/lucos_navbar:latest as navbar
 FROM node:18
 
 WORKDIR /usr/src/app
 COPY . .
+COPY --from=navbar lucos_navbar.js .
 
 RUN npm install
 

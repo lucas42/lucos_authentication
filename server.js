@@ -257,6 +257,9 @@ function start_server(port) {
 			case "/robots.txt":
 				res.sendFile('robots.txt', 'text/plain');
 				break;
+			case "/lucos_navbar.js":
+				res.sendFile('lucos_navbar.js', 'text/javascript');
+				break;
 			case "/providerimg":
 				try {
 					provider = new Provider(params.type);
