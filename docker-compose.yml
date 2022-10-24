@@ -1,13 +1,14 @@
 version: '3'
 services:
-    authentication:
-      build: .
-      container_name: authentication
-      ports: 
-        - "8006:8006"
-      volumes:
-        - "config:/etc/authconfig"
-      image: lucas42/lucos_authentication
+  authentication:
+    build: .
+    container_name: authentication
+    ports:
+      - "8006:8006"
+    volumes:
+      - "config:/etc/authconfig"
+    image: lucas42/lucos_authentication
+    restart: always
 
 volumes:
   config:
