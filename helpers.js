@@ -8,6 +8,7 @@ async function fetchAgentId(accountType, userid, callback) {
 	try {
 		const response = await fetch(url, { redirect: "manual" });
 		const agentid = response.headers.get("Location").split('/').pop();
+		console.log(`Received agentid ${agentid}`);
 		if (isNaN(agentid)) throw `agentid is not a number.  "${agentid}"`;
 		callback(agentid);
 	} catch (error) {
