@@ -44,6 +44,7 @@ var port;
 try {
 	start_server(port);
 } catch (e) {
+	console.error(e);
 	exit(e, 3);
 }
 
