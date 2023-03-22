@@ -86,7 +86,7 @@ var Provider = (function () {
 		this.getUserId = async function (token, callback) {
 			const url = userinfoendpoint + "?access_token=" + encodeURIComponent(token)
 			const response = await fetch(url);
-			const data = response.json();
+			const data = await response.json();
 			callback(data.id, {name: data.name, username: data.username});
 		};
 	}
