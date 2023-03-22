@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Authentication service for lucos apps",
   "main": "server.js",
-  "dependencies": {
-    "request": "^2.88.2"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -16,7 +12,6 @@
     "url": "git+https://github.com/lucas42/lucos_authentication.git"
   },
   "author": "Luke Blaney",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/lucas42/lucos_authentication/issues"
   },

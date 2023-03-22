@@ -1,6 +1,5 @@
 "strict mode";
-var request = require('request'),
-   url = require('url'),
+const url = require('url'),
    querystring = require('querystring');
 
 
@@ -34,24 +33,22 @@ var Provider = (function () {
 		this.getAccountType = function () {
 			return accountType;
 		}
-		function getToken(querydata, callback) {
-			request({
-				url: "https://"+token_host+token_path,
-				method: 'POST',
-				form: querydata
-			}, function (error, response, body) {
-				if (error) {
-					console.error("Can't request https://"+token_host+token_path);
-					console.error(error);
-					return;
-				}
-				var contenttype = response.headers['content-type'].replace(/;.*/,'');
-				data=null;
+		async function getToken(rawformdata, callback) {
+			const url = "https://"+token_host+token_path;
+			const formdata = new FormData();
+			for (const key in rawformdata) {
+				formdata.append(key, rawformdata[key]);
+			}
+			try {
+				const response = await fetch(url, {method: 'POST', body: formdata});
+				const contenttype = response.headers.get('content-type').replace(/;.*/,'');
+				let data;
 				switch (contenttype) {
 					case "application/json":
-						data = JSON.parse(body);
+						data = await response.json();
 						break;
 					case "text/plain":
+						const body = await response.text();
 						data = querystring.parse(body);
 						break;
 					default:
@@ -59,7 +56,11 @@ var Provider = (function () {
 				}
 				if (data.access_token) callback(data.access_token);
 				else console.error("No access token", data);
-			});
+			} catch (error) {
+				console.error(`Can't request ${url}`);
+				console.error(error);
+				return;
+			}
 		}
 				
 		this.getToken = function(code, callback) {
@@ -82,17 +83,12 @@ var Provider = (function () {
 		this.getClientId = function () {
 			return clientid;
 		}
-		this.getUserId = function (token, callback) {
-			request({
-				url: userinfoendpoint,
-				qs: {
-					access_token: token
-				}
-			}, function (error, response, body) {
-				var data = JSON.parse(body);
-					callback(data.id, {name: data.name, username: data.username});
-			});
-	};
+		this.getUserId = async function (token, callback) {
+			const url = userinfoendpoint + "?access_token=" + encodeURIComponent(token)
+			const response = await fetch(url);
+			const data = response.json();
+			callback(data.id, {name: data.name, username: data.username});
+		};
 	}
 	
 
