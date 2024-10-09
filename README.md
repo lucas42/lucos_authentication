@@ -27,4 +27,4 @@ The application should continue to run if appkeys.conf is missing, with no sensi
 `docker-compose up -d`
 
 ## Building
-The build is configured to run in Dockerhub when a commit is pushed to the master branch in github.
+The build is configured to run in Dockerhub when a commit is pushed to the `main` branch in github.
