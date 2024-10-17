@@ -1,5 +1,5 @@
 FROM lucas42/lucos_navbar:latest as navbar
-FROM node:22
+FROM node:23
 
 WORKDIR /usr/src/app
 COPY . .
