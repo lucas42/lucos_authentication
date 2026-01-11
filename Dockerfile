@@ -8,6 +8,5 @@ COPY --from=navbar lucos_navbar.js .
 RUN npm install
 
 ENV NODE_ENV production
-EXPOSE $PORT
 
 CMD [ "npm", "start" ]
