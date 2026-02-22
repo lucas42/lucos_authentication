@@ -3,7 +3,7 @@ Authentication for lucos services
 
 ## Dependencies
 * docker
-* docker-compose
+* docker compose
 
 ## Setup
 Two config files are used to run lucos_auth, both should be placed in a docker volume named `lucos_authentication_config` (This gets mounted in the container at `/etc/authconfig`)
@@ -24,7 +24,7 @@ This file consists of a newline separated list of keys which can be used by othe
 The application should continue to run if appkeys.conf is missing, with no sensitive data returned to services callling it.
 
 ## Running
-`docker-compose up -d`
+`docker compose up -d`
 
 ## Building
 The build is configured to run in Dockerhub when a commit is pushed to the `main` branch in github.
