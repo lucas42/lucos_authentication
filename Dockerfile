@@ -1,4 +1,4 @@
-FROM lucas42/lucos_navbar:2.1.6 AS navbar
+FROM lucas42/lucos_navbar:2.1.7 AS navbar
 FROM node:25
 
 WORKDIR /usr/src/app
