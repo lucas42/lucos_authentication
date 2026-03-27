@@ -1,7 +1,7 @@
 services:
   authentication:
     build: .
-    container_name: authentication
+    container_name: lucos_authentication
     ports:
       - $PORT:$PORT
     environment:
