@@ -40,7 +40,7 @@ var Provider = (function () {
 				formdata.append(key, rawformdata[key]);
 			}
 			try {
-				const response = await fetch(url, {method: 'POST', body: formdata});
+				const response = await fetch(url, {method: 'POST', body: formdata, headers: {'User-Agent': process.env.SYSTEM}});
 				const contenttype = response.headers.get('content-type').replace(/;.*/,'');
 				let data;
 				switch (contenttype) {
@@ -85,7 +85,7 @@ var Provider = (function () {
 		}
 		this.getUserId = async function (token, callback) {
 			const url = userinfoendpoint + "?access_token=" + encodeURIComponent(token)
-			const response = await fetch(url);
+			const response = await fetch(url, {headers: {'User-Agent': process.env.SYSTEM}});
 			const data = await response.json();
 			callback(data.id, {name: data.name, username: data.username});
 		};
