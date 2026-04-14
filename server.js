@@ -276,6 +276,7 @@ function start_server(port) {
 						},
 						"normalised-agentid": {
 							techDetail: "Attempts to fetch an agentid from lucos_contacts",
+							dependsOn: "lucos_contacts",
 						},
 					},
 					metrics: {
