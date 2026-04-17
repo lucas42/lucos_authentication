@@ -8,7 +8,7 @@ services:
       - PORT
     volumes:
       - "config:/etc/authconfig"
-    image: lucas42/lucos_authentication
+    image: lucas42/lucos_authentication:${VERSION:-latest}
     restart: always
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:${PORT}/_info"]
