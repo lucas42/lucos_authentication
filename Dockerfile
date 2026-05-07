@@ -1,5 +1,5 @@
 FROM lucas42/lucos_navbar:2.1.72 AS navbar
-FROM node:25
+FROM node:26
 ARG VERSION
 ENV VERSION=$VERSION
 
