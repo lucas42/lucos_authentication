@@ -7,7 +7,13 @@ async function fetchAgentId(accountType, userid, callback) {
 	console.log(`Fetch agent id from contacts service ${url}`);
 	try {
 		const response = await fetch(url, { redirect: "manual" });
-		const agentid = response.headers.get("Location").split('/').pop();
+		const location = response.headers.get("Location");
+		if (!location) {
+			console.log(`No Location header from contacts (status ${response.status}) — treating as unknown agent`);
+			callback(null);
+			return;
+		}
+		const agentid = location.split('/').pop();
 		console.log(`Received agentid ${agentid}`);
 		if (isNaN(agentid)) throw `agentid is not a number.  "${agentid}"`;
 		callback(agentid);
