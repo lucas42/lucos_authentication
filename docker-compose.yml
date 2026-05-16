@@ -6,6 +6,7 @@ services:
       - $PORT:$PORT
     environment:
       - PORT
+      - SYSTEM
     volumes:
       - "config:/etc/authconfig"
     image: lucas42/lucos_authentication:${VERSION:-latest}
