@@ -1,4 +1,4 @@
-FROM lucas42/lucos_navbar:2.2.0 AS navbar
+FROM lucas42/lucos_navbar:2.3.0 AS navbar
 FROM node:26
 ARG VERSION
 ENV VERSION=$VERSION
